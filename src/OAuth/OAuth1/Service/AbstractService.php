@@ -57,6 +57,19 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
         return $token;
     }
 
+    public function requestGetRequestToken()
+    {
+        $authorizationHeader = array('Authorization' => $this->buildAuthorizationQueryForTokenRequest());
+        $headers = array_merge($authorizationHeader, $this->getExtraOAuthHeaders());
+
+        $responseBody = $this->httpClient->retrieveResponse($this->getRequestTokenEndpoint(), array(), $headers);
+
+        $token = $this->parseRequestTokenResponse($responseBody);
+        $this->storage->storeAccessToken($this->service(), $token);
+
+        return $token;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -89,6 +102,37 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
         $authorizationHeader = array(
             'Authorization' => $this->buildAuthorizationHeaderForAPIRequest(
                 'POST',
+                $this->getAccessTokenEndpoint(),
+                $this->storage->retrieveAccessToken($this->service()),
+                $bodyParams
+            )
+        );
+
+        $headers = array_merge($authorizationHeader, $this->getExtraOAuthHeaders());
+
+        $responseBody = $this->httpClient->retrieveResponse($this->getAccessTokenEndpoint(), $bodyParams, $headers);
+
+        $token = $this->parseAccessTokenResponse($responseBody);
+        $this->storage->storeAccessToken($this->service(), $token);
+
+        return $token;
+    }
+
+    public function requestGetAccessToken($token, $verifier, $tokenSecret = null)
+    {
+        if (is_null($tokenSecret)) {
+            $storedRequestToken = $this->storage->retrieveAccessToken($this->service());
+            $tokenSecret = $storedRequestToken->getRequestTokenSecret();
+        }
+        $this->signature->setTokenSecret($tokenSecret);
+
+        $bodyParams = array(
+            'oauth_verifier' => $verifier,
+        );
+
+        $authorizationHeader = array(
+            'Authorization' => $this->buildAuthorizationQueryForAPIRequest(
+                'GET',
                 $this->getAccessTokenEndpoint(),
                 $this->storage->retrieveAccessToken($this->service()),
                 $bodyParams
@@ -190,6 +234,34 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
     }
 
     /**
+     * Builds the authorization query string for getting an access or request token.
+     *
+     * @param array $extraParameters
+     *
+     * @return string
+     */
+    protected function buildAuthorizationQueryForTokenRequest(array $extraParameters = array())
+    {
+        $parameters = $this->getBasicAuthorizationHeaderInfo();
+        $parameters = array_merge($parameters, $extraParameters);
+        $parameters['oauth_signature'] = $this->signature->getSignature(
+            $this->getRequestTokenEndpoint(),
+            $parameters,
+            'GET'
+        );
+
+        $authorizationHeader = '';
+        $delimiter = '?';
+        foreach ($parameters as $key => $value) {
+            $authorizationHeader .= $delimiter . rawurlencode($key) . '=' . rawurlencode($value) . '';
+
+            $delimiter = '&';
+        }
+
+        return $authorizationHeader;
+    }
+
+    /**
      * Builds the authorization header for an authenticated API request
      *
      * @param string         $method
@@ -227,6 +299,49 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
         foreach ($authParameters as $key => $value) {
             $authorizationHeader .= $delimiter . rawurlencode($key) . '="' . rawurlencode($value) . '"';
             $delimiter = ', ';
+        }
+
+        return $authorizationHeader;
+    }
+
+    /**
+     * Builds the authorization header for an authenticated API request
+     *
+     * @param string         $method
+     * @param UriInterface   $uri        The uri the request is headed
+     * @param TokenInterface $token
+     * @param array          $bodyParams Request body if applicable (key/value pairs)
+     *
+     * @return string
+     */
+    protected function buildAuthorizationQueryForAPIRequest(
+        $method,
+        UriInterface $uri,
+        TokenInterface $token,
+        $bodyParams = null
+    ) {
+        $this->signature->setTokenSecret($token->getAccessTokenSecret());
+        $authParameters = $this->getBasicAuthorizationHeaderInfo();
+        if (isset($authParameters['oauth_callback'])) {
+            unset($authParameters['oauth_callback']);
+        }
+
+        $authParameters = array_merge($authParameters, array('oauth_token' => $token->getAccessToken()));
+
+        $signatureParams = (is_array($bodyParams)) ? array_merge($authParameters, $bodyParams) : $authParameters;
+        $authParameters['oauth_signature'] = $this->signature->getSignature($uri, $signatureParams, $method);
+
+        if (is_array($bodyParams) && isset($bodyParams['oauth_session_handle'])) {
+            $authParameters['oauth_session_handle'] = $bodyParams['oauth_session_handle'];
+            unset($bodyParams['oauth_session_handle']);
+        }
+
+        $authorizationHeader = '';
+        $delimiter = '?';
+
+        foreach ($authParameters as $key => $value) {
+            $authorizationHeader .= $delimiter . rawurlencode($key) . '=' . rawurlencode($value) . '';
+            $delimiter = '&';
         }
 
         return $authorizationHeader;
