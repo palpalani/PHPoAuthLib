@@ -70,7 +70,7 @@ class CurlClient extends AbstractClient
         // Normalize method name
         $method = strtoupper($method);
 
-        if ($method !== 'GET') {
+        if ($method !== 'QUERY') {
             $this->normalizeHeaders($extraHeaders);
         }
 
@@ -86,10 +86,14 @@ class CurlClient extends AbstractClient
         $extraHeaders['Connection'] = 'Connection: close';
 
         $ch = curl_init();
-        if ($method === 'GET') {
+        if ($method === 'QUERY') {
             curl_setopt($ch, CURLOPT_URL, $endpoint->getAbsoluteUri() . $extraHeaders['Authorization']);
         } else {
             curl_setopt($ch, CURLOPT_URL, $endpoint->getAbsoluteUri());
+        }
+        
+        if ($method === 'QUERY') {
+            $method = 'GET';
         }
 
         if ($method === 'POST' || $method === 'PUT') {
