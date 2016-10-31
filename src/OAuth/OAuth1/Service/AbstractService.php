@@ -177,9 +177,18 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
         /** @var $token StdOAuth1Token */
         $token = $this->storage->retrieveAccessToken($this->service());
         $extraHeaders = array_merge($this->getExtraApiHeaders(), $extraHeaders);
-        $authorizationHeader = array(
-            'Authorization' => $this->buildAuthorizationHeaderForAPIRequest($method, $uri, $token, $body)
-        );
+        //$authorizationHeader = array(
+        //    'Authorization' => $this->buildAuthorizationHeaderForAPIRequest($method, $uri, $token, $body)
+        //);
+        if($method === 'QUERY'){
+            $authorizationHeader = array(
+                'Authorization' => $this->buildAuthorizationQueryForAPIRequest($method, $uri, $token, $body)
+            );
+        } else {
+            $authorizationHeader = array(
+                'Authorization' => $this->buildAuthorizationHeaderForAPIRequest($method, $uri, $token, $body)
+            );
+        }
         $headers = array_merge($authorizationHeader, $extraHeaders);
 
         return $this->httpClient->retrieveResponse($uri, $body, $headers, $method);
