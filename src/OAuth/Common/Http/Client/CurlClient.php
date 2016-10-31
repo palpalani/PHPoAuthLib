@@ -70,7 +70,9 @@ class CurlClient extends AbstractClient
         // Normalize method name
         $method = strtoupper($method);
 
-        $this->normalizeHeaders($extraHeaders);
+        if ($method !== 'GET') {
+            $this->normalizeHeaders($extraHeaders);
+        }
 
         if ($method === 'GET' && !empty($requestBody)) {
             throw new \InvalidArgumentException('No body expected for "GET" request.');
@@ -84,8 +86,11 @@ class CurlClient extends AbstractClient
         $extraHeaders['Connection'] = 'Connection: close';
 
         $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $endpoint->getAbsoluteUri());
+        if ($method === 'GET') {
+            curl_setopt($ch, CURLOPT_URL, $endpoint->getAbsoluteUri() . $extraHeaders['Authorization']);
+        } else {
+            curl_setopt($ch, CURLOPT_URL, $endpoint->getAbsoluteUri());
+        }
 
         if ($method === 'POST' || $method === 'PUT') {
             if ($requestBody && is_array($requestBody)) {
