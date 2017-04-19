@@ -87,6 +87,9 @@ class CurlClient extends AbstractClient
 
         $ch = curl_init();
         if ($method === 'QUERY') {
+            if(isset($requestBody['oauth_verifier'])){
+                $extraHeaders['Authorization'] .= '&oauth_verifier=' . $requestBody['oauth_verifier'];
+            }
             curl_setopt($ch, CURLOPT_URL, $endpoint->getAbsoluteUri() . $extraHeaders['Authorization']);
         } else {
             curl_setopt($ch, CURLOPT_URL, $endpoint->getAbsoluteUri());
