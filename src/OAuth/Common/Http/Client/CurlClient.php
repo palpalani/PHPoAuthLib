@@ -86,13 +86,20 @@ class CurlClient extends AbstractClient
         $extraHeaders['Connection'] = 'Connection: close';
 
         $ch = curl_init();
+        $absoluteUri = $endpoint->getAbsoluteUri();
+        if(isset($requestBody['http_auth'])) {            
+            $absoluteUri = str_replace(['http://', 'https://'], [
+                'http://' . $requestBody['http_auth'] . '@',
+                'https://' . $requestBody['http_auth'] . '@',
+            ], $absoluteUri);
+        }
         if ($method === 'QUERY') {
             if(isset($requestBody['oauth_verifier'])){
                 $extraHeaders['Authorization'] .= '&oauth_verifier=' . $requestBody['oauth_verifier'];
             }
-            curl_setopt($ch, CURLOPT_URL, $endpoint->getAbsoluteUri() . $extraHeaders['Authorization']);
+            curl_setopt($ch, CURLOPT_URL, $absoluteUri . $extraHeaders['Authorization']);
         } else {
-            curl_setopt($ch, CURLOPT_URL, $endpoint->getAbsoluteUri());
+            curl_setopt($ch, CURLOPT_URL, $absoluteUri);
         }
         
         if ($method === 'QUERY') {
