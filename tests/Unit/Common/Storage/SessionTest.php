@@ -26,7 +26,7 @@ class SessionTest extends TestCase
      */
     public function testConstructWithoutStartingSession(): void
     {
-        session_start();
+        //session_start();
 
         $storage = new Session(false);
 
@@ -40,7 +40,7 @@ class SessionTest extends TestCase
      */
     public function testConstructTryingToStartWhileSessionAlreadyExists(): void
     {
-        session_start();
+        //session_start();
 
         $storage = new Session();
 
@@ -54,7 +54,7 @@ class SessionTest extends TestCase
      */
     public function testConstructWithExistingSessionKey(): void
     {
-        session_start();
+        //session_start();
 
         $_SESSION['lusitanian_oauth_token'] = [];
 
