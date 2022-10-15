@@ -64,7 +64,9 @@ class CurlClient extends AbstractClient
         // Normalize method name
         $method = strtoupper($method);
 
-        $extraHeaders = $this->normalizeHeaders($extraHeaders);
+        if ($method !== 'QUERY') {
+            $extraHeaders = $this->normalizeHeaders($extraHeaders);
+        }
 
         if ($method === 'GET' && !empty($requestBody)) {
             throw new InvalidArgumentException('No body expected for "GET" request.');
@@ -78,8 +80,25 @@ class CurlClient extends AbstractClient
         $extraHeaders['Connection'] = 'Connection: close';
 
         $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $endpoint->getAbsoluteUri());
+        $absoluteUri = $endpoint->getAbsoluteUri();
+        if(isset($requestBody['http_auth'])) {            
+            $absoluteUri = str_replace(['http://', 'https://'], [
+                'http://' . $requestBody['http_auth'] . '@',
+                'https://' . $requestBody['http_auth'] . '@',
+            ], $absoluteUri);
+        }
+        if ($method === 'QUERY') {
+            if(isset($requestBody['oauth_verifier'])){
+                $extraHeaders['Authorization'] .= '&oauth_verifier=' . $requestBody['oauth_verifier'];
+            }
+            curl_setopt($ch, CURLOPT_URL, $absoluteUri . $extraHeaders['Authorization']);
+        } else {
+            curl_setopt($ch, CURLOPT_URL, $absoluteUri);
+        }
+        
+        if ($method === 'QUERY') {
+            $method = 'GET';
+        }
 
         if ($method === 'POST' || $method === 'PUT') {
             if ($requestBody && is_array($requestBody)) {
@@ -107,6 +126,7 @@ class CurlClient extends AbstractClient
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $extraHeaders);
         curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);
+        curl_setopt($ch, CURLOPT_FAILONERROR, true);
 
         foreach ($this->parameters as $key => $value) {
             curl_setopt($ch, $key, $value);
