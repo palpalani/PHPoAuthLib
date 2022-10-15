@@ -64,8 +64,10 @@ class EveOnlineTest extends TestCase
             $this->createMock('\\OAuth\\Common\\Storage\\TokenStorageInterface')
         );
 
-        self::assertSame('https://login.eveonline.com/oauth/authorize',
-            $service->getAuthorizationEndpoint()->getAbsoluteUri());
+        self::assertSame(
+            'https://login.eveonline.com/oauth/authorize',
+            $service->getAuthorizationEndpoint()->getAbsoluteUri()
+        );
     }
 
     /**
@@ -80,8 +82,10 @@ class EveOnlineTest extends TestCase
             $this->createMock('\\OAuth\\Common\\Storage\\TokenStorageInterface')
         );
 
-        self::assertSame('https://login.eveonline.com/oauth/token',
-            $service->getAccessTokenEndpoint()->getAbsoluteUri());
+        self::assertSame(
+            'https://login.eveonline.com/oauth/token',
+            $service->getAccessTokenEndpoint()->getAbsoluteUri()
+        );
     }
 
     /**

@@ -33,12 +33,12 @@ $credentials = new Credentials(
 /** @var Microsoft $microsoft */
 $microsoft = $serviceFactory->createService('microsoft', $credentials, $storage, ['basic']);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from Microsoft, get the token
     $token = $microsoft->requestAccessToken($_GET['code']);
 
     var_dump($token);
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $microsoft->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

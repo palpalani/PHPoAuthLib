@@ -29,7 +29,7 @@ $credentials = new Credentials(
 // Instantiate the Yahoo service using the credentials, http client and storage mechanism for the token
 $yahooService = $serviceFactory->createService('Yahoo', $credentials, $storage);
 
-if (!empty($_GET['oauth_token'])) {
+if (! empty($_GET['oauth_token'])) {
     $token = $storage->retrieveAccessToken('Yahoo');
 
     // This was a callback request from Yahoo, get the token
@@ -43,7 +43,7 @@ if (!empty($_GET['oauth_token'])) {
     $result = json_decode($yahooService->request('profile'));
 
     echo 'result: <pre>' . print_r($result, true) . '</pre>';
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     // extra request needed for oauth1 to request a request token :-)
     $token = $yahooService->requestRequestToken();
 

@@ -33,11 +33,17 @@ class Deezer extends AbstractService
      * http://developers.deezer.com/api/permissions.
      */
     const SCOPE_BASIC_ACCESS = 'basic_access';       // Access users basic information
+
     const SCOPE_EMAIL = 'email';              // Get the user's email
+
     const SCOPE_OFFLINE_ACCESS = 'offline_access';     // Access user data any time
+
     const SCOPE_MANAGE_LIBRARY = 'manage_library';     // Manage users' library
+
     const SCOPE_MANAGE_COMMUNITY = 'manage_community';   // Manage users' friends
+
     const SCOPE_DELETE_LIBRARY = 'delete_library';     // Delete library items
+
     const SCOPE_LISTENING_HISTORY = 'listening_history';  // Access the user's listening history
 
     public function __construct(
@@ -91,7 +97,7 @@ class Deezer extends AbstractService
     protected function parseAccessTokenResponse($responseBody)
     {
         parse_str($responseBody, $data);
-        if (null === $data || !is_array($data) || empty($data)) {
+        if (null === $data || ! is_array($data) || empty($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException(

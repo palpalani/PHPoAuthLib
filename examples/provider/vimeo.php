@@ -34,7 +34,7 @@ $credentials = new Credentials(
 /** @var vimeo $vimeoService */
 $vimeoService = $serviceFactory->createService('Vimeo', $credentials, $storage, [Vimeo::SCOPE_PUBLIC, Vimeo::SCOPE_PRIVATE]);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // retrieve the CSRF state parameter
     $state = $_GET['state'] ?? null;
     // This was a callback request from vimeo, get the token
@@ -43,7 +43,7 @@ if (!empty($_GET['code'])) {
     $result = json_decode($vimeoService->request('/me'));
     // Show some of the resultant data
     echo 'Your unique Vimeo account is <a href="' . $result->link . '">' . $result->uri . '</a> and your name is ' . $result->name;
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $vimeoService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

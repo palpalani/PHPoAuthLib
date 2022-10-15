@@ -14,6 +14,7 @@ class Salesforce extends AbstractService
      * @var string
      */
     const   SCOPE_API = 'api';
+
     const   SCOPE_REFRESH_TOKEN = 'refresh_token';
 
     /**
@@ -39,9 +40,9 @@ class Salesforce extends AbstractService
     {
         parse_str($responseBody, $data);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
-        } elseif (!isset($data['oauth_callback_confirmed']) || $data['oauth_callback_confirmed'] !== 'true') {
+        } elseif (! isset($data['oauth_callback_confirmed']) || $data['oauth_callback_confirmed'] !== 'true') {
             throw new TokenResponseException('Error in retrieving token.');
         }
 
@@ -55,7 +56,7 @@ class Salesforce extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error'] . '"');

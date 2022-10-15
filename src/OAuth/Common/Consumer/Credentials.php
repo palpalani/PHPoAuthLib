@@ -23,9 +23,9 @@ class Credentials implements CredentialsInterface
     protected $callbackUrl;
 
     /**
-     * @param string $consumerId
-     * @param string $consumerSecret
-     * @param string $callbackUrl
+     * @param  string  $consumerId
+     * @param  string  $consumerSecret
+     * @param  string  $callbackUrl
      */
     public function __construct($consumerId, $consumerSecret, $callbackUrl)
     {

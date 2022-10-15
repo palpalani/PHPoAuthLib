@@ -36,7 +36,7 @@ $serviceFactory->setHttpClient(new CurlClient());
 // Instantiate the Netatmo service using the credentials, http client and storage mechanism for the token
 $NetatmoService = $serviceFactory->createService('Netatmo', $credentials, $storage);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // retrieve the CSRF state parameter
     $state = $_GET['state'] ?? null;
     // This was a callback request from Netatmo, get the token
@@ -45,7 +45,7 @@ if (!empty($_GET['code'])) {
     $result = json_decode($NetatmoService->request('getuser'), true);
     // Show some of the resultant data
     echo 'Hello ' . $result['body']['mail'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $NetatmoService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

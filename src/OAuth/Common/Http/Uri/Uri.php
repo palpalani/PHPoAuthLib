@@ -60,7 +60,7 @@ class Uri implements UriInterface
     private $explicitTrailingHostSlash = false;
 
     /**
-     * @param string $uri
+     * @param  string  $uri
      */
     public function __construct($uri = null)
     {
@@ -70,7 +70,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @param string $uri
+     * @param  string  $uri
      */
     protected function parseUri($uri): void
     {
@@ -80,7 +80,7 @@ class Uri implements UriInterface
             throw new InvalidArgumentException("Invalid URI: $uri");
         }
 
-        if (!isset($uriParts['scheme'])) {
+        if (! isset($uriParts['scheme'])) {
             throw new InvalidArgumentException('Invalid URI: http|https scheme required');
         }
 
@@ -108,10 +108,10 @@ class Uri implements UriInterface
         $this->fragment = $uriParts['fragment'] ?? '';
 
         $userInfo = '';
-        if (!empty($uriParts['user'])) {
+        if (! empty($uriParts['user'])) {
             $userInfo .= $uriParts['user'];
         }
-        if ($userInfo && !empty($uriParts['pass'])) {
+        if ($userInfo && ! empty($uriParts['pass'])) {
             $userInfo .= ':' . $uriParts['pass'];
         }
 
@@ -119,8 +119,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @param string $rawUserInfo
-     *
+     * @param  string  $rawUserInfo
      * @return string
      */
     protected function protectUserInfo($rawUserInfo)
@@ -249,11 +248,11 @@ class Uri implements UriInterface
             $uri .= $this->path;
         }
 
-        if (!empty($this->query)) {
+        if (! empty($this->query)) {
             $uri .= "?{$this->query}";
         }
 
-        if (!empty($this->fragment)) {
+        if (! empty($this->fragment)) {
             $uri .= "#{$this->fragment}";
         }
 
@@ -292,11 +291,11 @@ class Uri implements UriInterface
             $uri .= $this->path;
         }
 
-        if (!empty($this->query)) {
+        if (! empty($this->query)) {
             $uri .= "?{$this->query}";
         }
 
-        if (!empty($this->fragment)) {
+        if (! empty($this->fragment)) {
             $uri .= "#{$this->fragment}";
         }
 
@@ -320,7 +319,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @param string $query
+     * @param  string  $query
      */
     public function setQuery($query): void
     {
@@ -328,8 +327,8 @@ class Uri implements UriInterface
     }
 
     /**
-     * @param string $var
-     * @param string $val
+     * @param  string  $var
+     * @param  string  $val
      */
     public function addToQuery($var, $val): void
     {
@@ -340,7 +339,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @param string $fragment
+     * @param  string  $fragment
      */
     public function setFragment($fragment): void
     {
@@ -348,7 +347,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @param string $scheme
+     * @param  string  $scheme
      */
     public function setScheme($scheme): void
     {
@@ -356,7 +355,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @param string $userInfo
+     * @param  string  $userInfo
      */
     public function setUserInfo($userInfo): void
     {
@@ -365,7 +364,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @param int $port
+     * @param  int  $port
      */
     public function setPort($port): void
     {
@@ -379,7 +378,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @param string $host
+     * @param  string  $host
      */
     public function setHost($host): void
     {

@@ -26,10 +26,15 @@ class DeviantArt extends AbstractService
      * @see https://www.deviantart.com/developers/http/v1/20150217
      */
     const SCOPE_FEED = 'feed';
+
     const SCOPE_BROWSE = 'browse';
+
     const SCOPE_COMMENT = 'comment.post';
+
     const SCOPE_STASH = 'stash';
+
     const SCOPE_USER = 'user';
+
     const SCOPE_USERMANAGE = 'user.manage';
 
     public function __construct(
@@ -69,7 +74,7 @@ class DeviantArt extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error'] . '"');

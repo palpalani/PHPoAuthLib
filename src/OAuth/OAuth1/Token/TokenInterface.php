@@ -15,7 +15,7 @@ interface TokenInterface extends BaseTokenInterface
     public function getAccessTokenSecret();
 
     /**
-     * @param string $accessTokenSecret
+     * @param  string  $accessTokenSecret
      */
     public function setAccessTokenSecret($accessTokenSecret);
 
@@ -25,7 +25,7 @@ interface TokenInterface extends BaseTokenInterface
     public function getRequestTokenSecret();
 
     /**
-     * @param string $requestTokenSecret
+     * @param  string  $requestTokenSecret
      */
     public function setRequestTokenSecret($requestTokenSecret);
 
@@ -35,7 +35,7 @@ interface TokenInterface extends BaseTokenInterface
     public function getRequestToken();
 
     /**
-     * @param string $requestToken
+     * @param  string  $requestToken
      */
     public function setRequestToken($requestToken);
 }

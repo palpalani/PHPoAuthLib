@@ -13,6 +13,7 @@ use OAuth\OAuth2\Token\StdOAuth2Token;
 class Stripe extends AbstractService
 {
     const SCOPE_READONLY = 'read_only';
+
     const SCOPE_READWRITE = 'read_write';
 
     public function __construct(
@@ -60,7 +61,7 @@ class Stripe extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error'] . '"');

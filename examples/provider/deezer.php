@@ -33,7 +33,7 @@ $serviceFactory->setHttpClient(new CurlClient());
 /** @var Deezer $deezerService */
 $deezerService = $serviceFactory->createService('deezer', $credentials, $storage, [Deezer::SCOPE_BASIC_ACCESS, Deezer::SCOPE_OFFLINE_ACCESS, Deezer::SCOPE_EMAIL, Deezer::SCOPE_DELETE_LIBRARY]);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // retrieve the CSRF state parameter
     $state = $_GET['state'] ?? null;
     // This was a callback request from deezer, get the token
@@ -43,7 +43,7 @@ if (!empty($_GET['code'])) {
     echo 'Hello ' . ucfirst($result['name'])
     . ' your Deezer Id is ' . $result['id'];
     echo '<br><img src="' . $result['picture_medium'] . '">';
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $deezerService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

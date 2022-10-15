@@ -25,7 +25,7 @@ abstract class AbstractClient implements ClientInterface
     /**
      * Creates instance.
      *
-     * @param string $userAgent The UA string the client will use
+     * @param  string  $userAgent The UA string the client will use
      */
     public function __construct($userAgent = 'PHPoAuthLib')
     {
@@ -33,8 +33,7 @@ abstract class AbstractClient implements ClientInterface
     }
 
     /**
-     * @param int $redirects Maximum redirects for client
-     *
+     * @param  int  $redirects Maximum redirects for client
      * @return ClientInterface
      */
     public function setMaxRedirects($redirects)
@@ -45,8 +44,7 @@ abstract class AbstractClient implements ClientInterface
     }
 
     /**
-     * @param int $timeout Request timeout time for client in seconds
-     *
+     * @param  int  $timeout Request timeout time for client in seconds
      * @return ClientInterface
      */
     public function setTimeout($timeout)
@@ -57,7 +55,7 @@ abstract class AbstractClient implements ClientInterface
     }
 
     /**
-     * @param array $headers
+     * @param  array  $headers
      */
     public function normalizeHeaders($headers): array
     {

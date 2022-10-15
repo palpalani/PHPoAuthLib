@@ -35,10 +35,12 @@ $serviceName = 'QuickBooks';
 // storage mechanism for the token
 /** @var QuickBooks $quickbooksService */
 $quickbooksService = $serviceFactory->createService(
-    $serviceName, $credentials, $storage
+    $serviceName,
+    $credentials,
+    $storage
 );
 
-if (!empty($_GET['oauth_token'])) {
+if (! empty($_GET['oauth_token'])) {
     $token = $storage->retrieveAccessToken($serviceName);
 
     // This was a callback request from QuickBooks, get the token
@@ -54,7 +56,7 @@ if (!empty($_GET['oauth_token'])) {
     $result = json_decode($quickbooksService->request($url));
 
     echo 'result: <pre>' . print_r($result, true) . '</pre>';
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     // extra request needed for oauth1 to request a request token :-)
     $token = $quickbooksService->requestRequestToken();
 

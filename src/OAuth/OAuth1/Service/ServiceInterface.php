@@ -21,10 +21,9 @@ interface ServiceInterface extends BaseServiceInterface
     /**
      * Retrieves and stores/returns the OAuth1 access token after a successful authorization.
      *
-     * @param string $token       the request token from the callback
-     * @param string $verifier
-     * @param string $tokenSecret
-     *
+     * @param  string  $token       the request token from the callback
+     * @param  string  $verifier
+     * @param  string  $tokenSecret
      * @return TokenInterface $token
      */
     public function requestAccessToken($token, $verifier, $tokenSecret);

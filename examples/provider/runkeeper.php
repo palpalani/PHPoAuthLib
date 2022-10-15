@@ -31,7 +31,7 @@ $credentials = new Credentials(
 /** @var RunKeeper $runkeeperService */
 $runkeeperService = $serviceFactory->createService('RunKeeper', $credentials, $storage, []);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from RunKeeper, get the token
     $token = $runkeeperService->requestAccessToken($_GET['code']);
 
@@ -40,7 +40,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your unique RunKeeper user id is: ' . $result['userID'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $runkeeperService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

@@ -32,7 +32,7 @@ $credentials = new Credentials(
 /** @var Etsy $etsyService */
 $etsyService = $serviceFactory->createService('Etsy', $credentials, $storage);
 
-if (!empty($_GET['oauth_token'])) {
+if (! empty($_GET['oauth_token'])) {
     $token = $storage->retrieveAccessToken('Etsy');
 
     // This was a callback request from Etsy, get the token
@@ -46,7 +46,7 @@ if (!empty($_GET['oauth_token'])) {
     $result = json_decode($etsyService->request('/private/users/__SELF__'));
 
     echo 'result: <pre>' . print_r($result, true) . '</pre>';
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $response = $etsyService->requestRequestToken();
     $extra = $response->getExtraParams();
     $url = $extra['login_url'];

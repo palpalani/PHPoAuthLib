@@ -36,14 +36,14 @@ $serviceFactory->setHttpClient(new CurlClient());
 // Instantiate the ParrotFlowerPower service using the credentials, http client and storage mechanism for the token
 $parrotFlowerPowerService = $serviceFactory->createService('parrotFlowerPower', $credentials, $storage);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from parrotFlowerPower, get the token
     $token = $parrotFlowerPowerService->requestAccessToken($_GET['code']);
     // Send a request with it
     $result = json_decode($parrotFlowerPowerService->request('https://apiflowerpower.parrot.com/user/v4/profile'), true);
     // Show some of the resultant data
     echo 'Hello ' . $result['user_profile']['username'] . ' ' . $result['user_profile']['email'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $parrotFlowerPowerService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

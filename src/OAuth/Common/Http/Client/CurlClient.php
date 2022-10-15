@@ -35,8 +35,7 @@ class CurlClient extends AbstractClient
     }
 
     /**
-     * @param bool $force
-     *
+     * @param  bool  $force
      * @return CurlClient
      */
     public function setForceSSL3($force)
@@ -50,9 +49,8 @@ class CurlClient extends AbstractClient
      * Any implementing HTTP providers should send a request to the provided endpoint with the parameters.
      * They should return, in string form, the response body and throw an exception on error.
      *
-     * @param mixed        $requestBody
-     * @param string       $method
-     *
+     * @param  mixed  $requestBody
+     * @param  string  $method
      * @return string
      */
     public function retrieveResponse(
@@ -68,11 +66,11 @@ class CurlClient extends AbstractClient
             $extraHeaders = $this->normalizeHeaders($extraHeaders);
         }
 
-        if ($method === 'GET' && !empty($requestBody)) {
+        if ($method === 'GET' && ! empty($requestBody)) {
             throw new InvalidArgumentException('No body expected for "GET" request.');
         }
 
-        if (!isset($extraHeaders['Content-Type']) && $method === 'POST' && is_array($requestBody)) {
+        if (! isset($extraHeaders['Content-Type']) && $method === 'POST' && is_array($requestBody)) {
             $extraHeaders['Content-Type'] = 'Content-Type: application/x-www-form-urlencoded';
         }
 
@@ -81,21 +79,21 @@ class CurlClient extends AbstractClient
 
         $ch = curl_init();
         $absoluteUri = $endpoint->getAbsoluteUri();
-        if(isset($requestBody['http_auth'])) {            
+        if (isset($requestBody['http_auth'])) {
             $absoluteUri = str_replace(['http://', 'https://'], [
                 'http://' . $requestBody['http_auth'] . '@',
                 'https://' . $requestBody['http_auth'] . '@',
             ], $absoluteUri);
         }
         if ($method === 'QUERY') {
-            if(isset($requestBody['oauth_verifier'])){
+            if (isset($requestBody['oauth_verifier'])) {
                 $extraHeaders['Authorization'] .= '&oauth_verifier=' . $requestBody['oauth_verifier'];
             }
             curl_setopt($ch, CURLOPT_URL, $absoluteUri . $extraHeaders['Authorization']);
         } else {
             curl_setopt($ch, CURLOPT_URL, $absoluteUri);
         }
-        
+
         if ($method === 'QUERY') {
             $method = 'GET';
         }

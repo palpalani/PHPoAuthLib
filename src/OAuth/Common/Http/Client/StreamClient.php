@@ -15,9 +15,8 @@ class StreamClient extends AbstractClient
      * Any implementing HTTP providers should send a request to the provided endpoint with the parameters.
      * They should return, in string form, the response body and throw an exception on error.
      *
-     * @param mixed        $requestBody
-     * @param string       $method
-     *
+     * @param  mixed  $requestBody
+     * @param  string  $method
      * @return string
      */
     public function retrieveResponse(
@@ -31,11 +30,11 @@ class StreamClient extends AbstractClient
 
         $extraHeaders = $this->normalizeHeaders($extraHeaders);
 
-        if ($method === 'GET' && !empty($requestBody)) {
+        if ($method === 'GET' && ! empty($requestBody)) {
             throw new InvalidArgumentException('No body expected for "GET" request.');
         }
 
-        if (!isset($extraHeaders['Content-Type']) && $method === 'POST' && is_array($requestBody)) {
+        if (! isset($extraHeaders['Content-Type']) && $method === 'POST' && is_array($requestBody)) {
             $extraHeaders['Content-Type'] = 'Content-Type: application/x-www-form-urlencoded';
         }
 

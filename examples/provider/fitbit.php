@@ -33,7 +33,7 @@ $credentials = new Credentials(
 /** @var FitBit $fitbitService */
 $fitbitService = $serviceFactory->createService('FitBit', $credentials, $storage);
 
-if (!empty($_GET['oauth_token'])) {
+if (! empty($_GET['oauth_token'])) {
     $token = $storage->retrieveAccessToken('FitBit');
 
     // This was a callback request from fitbit, get the token
@@ -47,7 +47,7 @@ if (!empty($_GET['oauth_token'])) {
     $result = json_decode($fitbitService->request('user/-/profile.json'));
 
     echo 'result: <pre>' . print_r($result, true) . '</pre>';
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     // extra request needed for oauth1 to request a request token :-)
     $token = $fitbitService->requestRequestToken();
 

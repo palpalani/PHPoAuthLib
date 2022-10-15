@@ -16,7 +16,7 @@ $helper->setTitle('Google');
 
 if (empty($_GET)) {
     echo $helper->getContent();
-} elseif (!empty($_GET['key']) && !empty($_GET['secret']) && $_GET['oauth'] !== 'redirect') {
+} elseif (! empty($_GET['key']) && ! empty($_GET['secret']) && $_GET['oauth'] !== 'redirect') {
     echo $helper->getHeader();
 
     try {
@@ -27,7 +27,7 @@ if (empty($_GET)) {
         $helper->getErrorMessage($exception);
     }
     echo $helper->getFooter();
-} elseif (!empty($_GET['code'])) {
+} elseif (! empty($_GET['code'])) {
     $credentials = new Credentials($_GET['key'], $_GET['secret'], $helper->getCurrentUrl());
     $google = new Google($credentials, $client, $storage);
 

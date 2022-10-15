@@ -37,7 +37,7 @@ $credentials = new Credentials(
 /** @var BitBucket $bbService */
 $bbService = $serviceFactory->createService('BitBucket', $credentials, $storage);
 
-if (!empty($_GET['oauth_token'])) {
+if (! empty($_GET['oauth_token'])) {
     $token = $storage->retrieveAccessToken('BitBucket');
 
     // This was a callback request from BitBucket, get the token
@@ -51,7 +51,7 @@ if (!empty($_GET['oauth_token'])) {
     $result = json_decode($bbService->request('user/repositories'));
 
     echo 'The first repo in the list is ' . $result[0]->name;
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     // extra request needed for oauth1 to request a request token :-)
     $token = $bbService->requestRequestToken();
 

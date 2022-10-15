@@ -9,14 +9,23 @@ use OAuth\OAuth2\Token\StdOAuth2Token;
 class Bitrix24 extends AbstractService
 {
     const SCOPE_DEPARTMENT = 'department';
+
     const SCOPE_CRM = 'crm';
+
     const SCOPE_CALENDAR = 'calendar';
+
     const SCOPE_USER = 'user';
+
     const SCOPE_ENTITY = 'entity';
+
     const SCOPE_TASK = 'task';
+
     const SCOPE_TASKS_EXTENDED = 'tasks_extended';
+
     const SCOPE_IM = 'im';
+
     const SCOPE_LOG = 'log';
+
     const SCOPE_SONET_GROUP = 'sonet_group';
 
     /**
@@ -97,7 +106,7 @@ class Bitrix24 extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error'] . '"');

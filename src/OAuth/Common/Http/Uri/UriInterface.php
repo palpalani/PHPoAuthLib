@@ -10,7 +10,7 @@ interface UriInterface
     public function getScheme();
 
     /**
-     * @param string $scheme
+     * @param  string  $scheme
      */
     public function setScheme($scheme);
 
@@ -20,7 +20,7 @@ interface UriInterface
     public function getHost();
 
     /**
-     * @param string $host
+     * @param  string  $host
      */
     public function setHost($host);
 
@@ -30,7 +30,7 @@ interface UriInterface
     public function getPort();
 
     /**
-     * @param int $port
+     * @param  int  $port
      */
     public function setPort($port);
 
@@ -40,7 +40,7 @@ interface UriInterface
     public function getPath();
 
     /**
-     * @param string $path
+     * @param  string  $path
      */
     public function setPath($path);
 
@@ -50,15 +50,15 @@ interface UriInterface
     public function getQuery();
 
     /**
-     * @param string $query
+     * @param  string  $query
      */
     public function setQuery($query);
 
     /**
      * Adds a param to the query string.
      *
-     * @param string $var
-     * @param string $val
+     * @param  string  $var
+     * @param  string  $val
      */
     public function addToQuery($var, $val);
 
@@ -75,7 +75,7 @@ interface UriInterface
     public function getUserInfo();
 
     /**
-     * @param string $userInfo
+     * @param  string  $userInfo
      */
     public function setUserInfo($userInfo);
 

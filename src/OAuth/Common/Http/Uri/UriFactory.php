@@ -30,8 +30,7 @@ class UriFactory implements UriFactoryInterface
     }
 
     /**
-     * @param string $absoluteUri
-     *
+     * @param  string  $absoluteUri
      * @return UriInterface
      */
     public function createFromAbsolute($absoluteUri)
@@ -42,14 +41,13 @@ class UriFactory implements UriFactoryInterface
     /**
      * Factory method to build a URI from parts.
      *
-     * @param string $scheme
-     * @param string $userInfo
-     * @param string $host
-     * @param string $port
-     * @param string $path
-     * @param string $query
-     * @param string $fragment
-     *
+     * @param  string  $scheme
+     * @param  string  $userInfo
+     * @param  string  $host
+     * @param  string  $port
+     * @param  string  $path
+     * @param  string  $query
+     * @param  string  $fragment
      * @return UriInterface
      */
     public function createFromParts($scheme, $userInfo, $host, $port, $path = '', $query = '', $fragment = '')
@@ -67,8 +65,7 @@ class UriFactory implements UriFactoryInterface
     }
 
     /**
-     * @param array $_server
-     *
+     * @param  array  $_server
      * @return null|UriInterface
      */
     private function attemptProxyStyleParse($_server)
@@ -84,8 +81,7 @@ class UriFactory implements UriFactoryInterface
     }
 
     /**
-     * @param array $_server
-     *
+     * @param  array  $_server
      * @return string
      */
     private function detectPath($_server)
@@ -143,8 +139,7 @@ class UriFactory implements UriFactoryInterface
      * not made through the HTTPS protocol. As a result, we filter the
      * value to a bool.
      *
-     * @param array $_server A super-global $_SERVER array
-     *
+     * @param  array  $_server A super-global $_SERVER array
      * @return string Returns http or https depending on the URI scheme
      */
     private function detectScheme(array $_server)

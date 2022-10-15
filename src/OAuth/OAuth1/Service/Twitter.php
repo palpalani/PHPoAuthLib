@@ -15,6 +15,7 @@ use OAuth\OAuth1\Token\StdOAuth1Token;
 class Twitter extends AbstractService
 {
     const ENDPOINT_AUTHENTICATE = 'https://api.twitter.com/oauth/authenticate';
+
     const ENDPOINT_AUTHORIZE = 'https://api.twitter.com/oauth/authorize';
 
     protected $authorizationEndpoint = self::ENDPOINT_AUTHENTICATE;
@@ -55,7 +56,7 @@ class Twitter extends AbstractService
     }
 
     /**
-     * @param mixed $endpoint
+     * @param  mixed  $endpoint
      */
     public function setAuthorizationEndpoint($endpoint): void
     {
@@ -82,9 +83,9 @@ class Twitter extends AbstractService
     {
         parse_str($responseBody, $data);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
-        } elseif (!isset($data['oauth_callback_confirmed']) || $data['oauth_callback_confirmed'] !== 'true') {
+        } elseif (! isset($data['oauth_callback_confirmed']) || $data['oauth_callback_confirmed'] !== 'true') {
             throw new TokenResponseException('Error in retrieving token.');
         }
 
@@ -98,11 +99,11 @@ class Twitter extends AbstractService
     {
         parse_str($responseBody, $data);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response: ' . $responseBody);
         } elseif (isset($data['error'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error'] . '"');
-        } elseif (!isset($data['oauth_token']) || !isset($data['oauth_token_secret'])) {
+        } elseif (! isset($data['oauth_token']) || ! isset($data['oauth_token_secret'])) {
             throw new TokenResponseException('Invalid response. OAuth Token data not set: ' . $responseBody);
         }
 

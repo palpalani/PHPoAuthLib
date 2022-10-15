@@ -155,9 +155,9 @@ class HttpClientsTest extends TestCase
     /**
      * Test on all HTTP clients.
      *
-     * @param array        $param
-     * @param string       $method
-     * @param Closure     $responseCallback
+     * @param  array  $param
+     * @param  string  $method
+     * @param  Closure  $responseCallback
      */
     protected function __doTestRetrieveResponse(UriInterface $uri, $param, array $header, $method, $responseCallback): void
     {

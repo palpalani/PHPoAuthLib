@@ -34,7 +34,7 @@ $credentials = new Credentials(
 /** @var Linkedin $linkedinService */
 $linkedinService = $serviceFactory->createService('linkedin', $credentials, $storage, ['r_basicprofile']);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // retrieve the CSRF state parameter
     $state = $_GET['state'] ?? null;
 
@@ -46,7 +46,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your linkedin first name is ' . $result['firstName'] . ' and your last name is ' . $result['lastName'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $linkedinService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

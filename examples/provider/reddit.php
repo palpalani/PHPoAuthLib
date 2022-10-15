@@ -32,7 +32,7 @@ $credentials = new Credentials(
 /** @var Reddit $reddit */
 $reddit = $serviceFactory->createService('Reddit', $credentials, $storage, ['identity']);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // retrieve the CSRF state parameter
     $state = $_GET['state'] ?? null;
 
@@ -42,7 +42,7 @@ if (!empty($_GET['code'])) {
     $result = json_decode($reddit->request('api/v1/me.json'), true);
 
     echo 'Your unique reddit user id is: ' . $result['id'] . ' and your username is ' . $result['name'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $reddit->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

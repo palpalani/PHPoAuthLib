@@ -25,14 +25,23 @@ class Dailymotion extends AbstractService
      * @var string
      */
     const SCOPE_EMAIL = 'email';
+
     const SCOPE_PROFILE = 'userinfo';
+
     const SCOPE_VIDEOS = 'manage_videos';
+
     const SCOPE_COMMENTS = 'manage_comments';
+
     const SCOPE_PLAYLIST = 'manage_playlists';
+
     const SCOPE_TILES = 'manage_tiles';
+
     const SCOPE_SUBSCRIPTIONS = 'manage_subscriptions';
+
     const SCOPE_FRIENDS = 'manage_friends';
+
     const SCOPE_FAVORITES = 'manage_favorites';
+
     const SCOPE_GROUPS = 'manage_groups';
 
     /**
@@ -41,7 +50,9 @@ class Dailymotion extends AbstractService
      * @var string
      */
     const DISPLAY_PAGE = 'page';
+
     const DISPLAY_POPUP = 'popup';
+
     const DISPLAY_MOBILE = 'mobile';
 
     /**
@@ -92,7 +103,7 @@ class Dailymotion extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error_description']) || isset($data['error'])) {
             throw new TokenResponseException(

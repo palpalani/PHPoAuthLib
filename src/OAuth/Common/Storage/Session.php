@@ -27,26 +27,26 @@ class Session implements TokenStorageInterface
     protected $stateVariableName;
 
     /**
-     * @param bool $startSession whether or not to start the session upon construction
-     * @param string $sessionVariableName the variable name to use within the _SESSION superglobal
-     * @param string $stateVariableName
+     * @param  bool  $startSession whether or not to start the session upon construction
+     * @param  string  $sessionVariableName the variable name to use within the _SESSION superglobal
+     * @param  string  $stateVariableName
      */
     public function __construct(
         $startSession = true,
         $sessionVariableName = 'lusitanian-oauth-token',
         $stateVariableName = 'lusitanian-oauth-state'
     ) {
-        if ($startSession && !$this->sessionHasStarted()) {
+        if ($startSession && ! $this->sessionHasStarted()) {
             session_start();
         }
 
         $this->startSession = $startSession;
         $this->sessionVariableName = $sessionVariableName;
         $this->stateVariableName = $stateVariableName;
-        if (!isset($_SESSION[$sessionVariableName])) {
+        if (! isset($_SESSION[$sessionVariableName])) {
             $_SESSION[$sessionVariableName] = [];
         }
-        if (!isset($_SESSION[$stateVariableName])) {
+        if (! isset($_SESSION[$stateVariableName])) {
             $_SESSION[$stateVariableName] = [];
         }
     }

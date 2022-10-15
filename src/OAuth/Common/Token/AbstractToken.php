@@ -28,10 +28,10 @@ abstract class AbstractToken implements TokenInterface
     protected $extraParams = [];
 
     /**
-     * @param string $accessToken
-     * @param string $refreshToken
-     * @param int    $lifetime
-     * @param array  $extraParams
+     * @param  string  $accessToken
+     * @param  string  $refreshToken
+     * @param  int  $lifetime
+     * @param  array  $extraParams
      */
     public function __construct($accessToken = null, $refreshToken = null, $lifetime = null, $extraParams = [])
     {
@@ -79,7 +79,7 @@ abstract class AbstractToken implements TokenInterface
     }
 
     /**
-     * @param string $accessToken
+     * @param  string  $accessToken
      */
     public function setAccessToken($accessToken): void
     {
@@ -87,7 +87,7 @@ abstract class AbstractToken implements TokenInterface
     }
 
     /**
-     * @param int $endOfLife
+     * @param  int  $endOfLife
      */
     public function setEndOfLife($endOfLife): void
     {
@@ -95,7 +95,7 @@ abstract class AbstractToken implements TokenInterface
     }
 
     /**
-     * @param int $lifetime
+     * @param  int  $lifetime
      */
     public function setLifetime($lifetime): void
     {
@@ -109,7 +109,7 @@ abstract class AbstractToken implements TokenInterface
     }
 
     /**
-     * @param string $refreshToken
+     * @param  string  $refreshToken
      */
     public function setRefreshToken($refreshToken): void
     {

@@ -59,15 +59,14 @@ class EveOnline extends AbstractService
     /**
      * Parses the access token response and returns a TokenInterface.
      *
-     * @param string $responseBody
-     *
+     * @param  string  $responseBody
      * @return TokenInterface
      */
     protected function parseAccessTokenResponse($responseBody)
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error_description'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error_description'] . '"');

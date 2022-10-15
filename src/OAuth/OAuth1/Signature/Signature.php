@@ -29,7 +29,7 @@ class Signature implements SignatureInterface
     }
 
     /**
-     * @param string $algorithm
+     * @param  string  $algorithm
      */
     public function setHashingAlgorithm($algorithm): void
     {
@@ -37,7 +37,7 @@ class Signature implements SignatureInterface
     }
 
     /**
-     * @param string $token
+     * @param  string  $token
      */
     public function setTokenSecret($token): void
     {
@@ -45,8 +45,7 @@ class Signature implements SignatureInterface
     }
 
     /**
-     * @param string       $method
-     *
+     * @param  string  $method
      * @return string
      */
     public function getSignature(UriInterface $uri, array $params, $method = 'POST')
@@ -105,8 +104,7 @@ class Signature implements SignatureInterface
     }
 
     /**
-     * @param string $data
-     *
+     * @param  string  $data
      * @return string
      */
     protected function hash($data)

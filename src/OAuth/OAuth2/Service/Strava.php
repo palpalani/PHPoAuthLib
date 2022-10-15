@@ -36,8 +36,10 @@ class Strava extends AbstractService
      */
     // default
     const SCOPE_PUBLIC = 'public';
+
     // Modify activities, upload on the user’s behalf
     const SCOPE_WRITE = 'write';
+
     // View private activities and data within privacy zones
     const SCOPE_VIEW_PRIVATE = 'view_private';
 
@@ -99,7 +101,7 @@ class Strava extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error_description'])) {
             throw new TokenResponseException(
@@ -132,7 +134,7 @@ class Strava extends AbstractService
 
     public function setApprouvalPrompt($prompt): void
     {
-        if (!in_array($prompt, ['auto', 'force'], true)) {
+        if (! in_array($prompt, ['auto', 'force'], true)) {
             // @todo Maybe could we rename this exception
             throw new InvalidAccessTypeException('Invalid approuvalPrompt, expected either auto or force.');
         }

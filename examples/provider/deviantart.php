@@ -34,7 +34,7 @@ $credentials = new Credentials(
 /** @var DeviantArt $deviantArtService */
 $deviantArtService = $serviceFactory->createService('DeviantArt', $credentials, $storage, ['browse']);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from facebook, get the token
     $token = $deviantArtService->requestAccessToken($_GET['code']);
 
@@ -43,7 +43,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your DeviantArt username is: ' . $result['username'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $deviantArtService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

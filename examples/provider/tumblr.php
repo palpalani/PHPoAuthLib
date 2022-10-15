@@ -34,7 +34,7 @@ $credentials = new Credentials(
 /** @var Tumblr $tumblrService */
 $tumblrService = $serviceFactory->createService('tumblr', $credentials, $storage);
 
-if (!empty($_GET['oauth_token'])) {
+if (! empty($_GET['oauth_token'])) {
     $token = $storage->retrieveAccessToken('Tumblr');
 
     // This was a callback request from tumblr, get the token
@@ -48,7 +48,7 @@ if (!empty($_GET['oauth_token'])) {
     $result = json_decode($tumblrService->request('user/info'));
 
     echo 'result: <pre>' . print_r($result, true) . '</pre>';
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     // extra request needed for oauth1 to request a request token :-)
     $token = $tumblrService->requestRequestToken();
 

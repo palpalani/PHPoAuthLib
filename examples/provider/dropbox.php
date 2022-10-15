@@ -32,7 +32,7 @@ $credentials = new Credentials(
 /** @var Dropbox $dropboxService */
 $dropboxService = $serviceFactory->createService('dropbox', $credentials, $storage, []);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from Dropbox, get the token
     $token = $dropboxService->requestAccessToken($_GET['code']);
 
@@ -41,7 +41,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your unique Dropbox user id is: ' . $result['uid'] . ' and your name is ' . $result['display_name'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $dropboxService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

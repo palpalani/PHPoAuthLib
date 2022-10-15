@@ -9,6 +9,7 @@ use OAuth\OAuth2\Token\StdOAuth2Token;
 class Mock extends AbstractService
 {
     const SCOPE_MOCK = 'mock';
+
     const SCOPE_MOCK_2 = 'mock2';
 
     private $authorizationMethod;

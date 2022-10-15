@@ -33,7 +33,7 @@ $serviceFactory->setHttpClient(new CurlClient());
 /** @var Pinterest $pinterestService */
 $pinterestService = $serviceFactory->createService('pinterest', $credentials, $storage, [Pinterest::SCOPE_READ_PUBLIC]);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // retrieve the CSRF state parameter
     $state = $_GET['state'] ?? null;
     // This was a callback request from pinterest, get the token
@@ -43,7 +43,7 @@ if (!empty($_GET['code'])) {
     echo 'Hello ' . ucfirst($result['data']['first_name'])
     . ' ' . strtoupper($result['data']['last_name'])
     . ' your Pinterst Id is ' . $result['data']['id'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $pinterestService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

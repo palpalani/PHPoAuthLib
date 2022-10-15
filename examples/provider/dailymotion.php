@@ -32,7 +32,7 @@ $credentials = new Credentials(
 /** @var Dailymotion $dailymotionService */
 $dailymotionService = $serviceFactory->createService('dailymotion', $credentials, $storage, ['email']);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from Dailymotion, get the token
     $token = $dailymotionService->requestAccessToken($_GET['code']);
 
@@ -41,7 +41,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your unique Dailymotion user id is: ' . $result['id'] . ' and your email is ' . $result['email'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $dailymotionService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

@@ -46,9 +46,9 @@ class Flickr extends AbstractService
     protected function parseRequestTokenResponse($responseBody)
     {
         parse_str($responseBody, $data);
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
-        } elseif (!isset($data['oauth_callback_confirmed']) || $data['oauth_callback_confirmed'] != 'true') {
+        } elseif (! isset($data['oauth_callback_confirmed']) || $data['oauth_callback_confirmed'] != 'true') {
             throw new TokenResponseException('Error in retrieving token.');
         }
 
@@ -58,7 +58,7 @@ class Flickr extends AbstractService
     protected function parseAccessTokenResponse($responseBody)
     {
         parse_str($responseBody, $data);
-        if ($data === null || !is_array($data)) {
+        if ($data === null || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error'] . '"');
@@ -81,7 +81,7 @@ class Flickr extends AbstractService
         $uri = $this->determineRequestUriFromPath('/', $this->baseApiUri);
         $uri->addToQuery('method', $path);
 
-        if (!empty($this->format)) {
+        if (! empty($this->format)) {
             $uri->addToQuery('format', $this->format);
 
             if ($this->format === 'json') {

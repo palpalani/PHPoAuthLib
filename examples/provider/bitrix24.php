@@ -35,7 +35,7 @@ $yourDomain = new \OAuth\Common\Http\Uri\Uri('https://' . $servicesCredentials['
 /** @var \OAuth\OAuth2\Service\Bitrix24 $bitrix24 */
 $bitrix24 = $serviceFactory->createService('Bitrix24', $credentials, $storage, ['user'], $yourDomain);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from bitrix24, get the token
     $bitrix24->requestAccessToken($_GET['code']);
 
@@ -44,7 +44,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your email on your bitrix24 account is ' . $userInfo['EMAIL'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $bitrix24->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

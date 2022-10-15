@@ -44,7 +44,7 @@ $serviceFactory->setHttpClient(new CurlClient());
 /** @var Hubic $hubicService */
 $hubicService = $serviceFactory->createService('hubic', $credentials, $storage, $scopes);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from hubic, get the token
     $token = $hubicService->requestAccessToken($_GET['code']);
 
@@ -52,7 +52,7 @@ if (!empty($_GET['code'])) {
     $result = json_decode($hubicService->request('https://api.hubic.com/1.0/account'), true);
     // Show some of the resultant data
     echo 'Hello ' . ucfirst($result['firstname']) . ' ' . strtoupper($result['lastname']) . ' (' . $result['email'] . ')';
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $hubicService->getAuthorizationUri();
     // var_dump($url);
     header('Location: ' . $url);

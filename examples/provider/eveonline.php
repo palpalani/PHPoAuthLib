@@ -31,7 +31,7 @@ $credentials = new Credentials(
 /** @var EveOnline $eveService */
 $eveService = $serviceFactory->createService('EveOnline', $credentials, $storage, ['']);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from Eve Online, get the token
     $token = $eveService->requestAccessToken($_GET['code']);
 
@@ -45,7 +45,7 @@ if (!empty($_GET['code'])) {
         . 'Scopes: ' . $result['Scopes'] . PHP_EOL
         . 'TokenType: ' . $result['TokenType'] . PHP_EOL
         . 'CharacterOwnerHash: ' . $result['CharacterOwnerHash'] . PHP_EOL;
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $eveService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

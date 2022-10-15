@@ -35,7 +35,7 @@ $credentials = new Credentials(
 /** @var Mailchimp $mailchimpService */
 $mailchimpService = $serviceFactory->createService('mailchimp', $credentials, $storage, []);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from mailchimp, get the token
     $token = $mailchimpService->requestAccessToken($_GET['code']);
 
@@ -45,7 +45,7 @@ if (!empty($_GET['code'])) {
     header('Content-Type: application/json');
     echo $result;
     exit;
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $mailchimpService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

@@ -11,7 +11,7 @@ $requirements = [
 ];
 require_once 'header.php';
 
-if (!$helper->isCli()) {
+if (! $helper->isCli()) {
     ?>
     <div class="jumbotron">
         <p>Welcome to OAuthLib</p>
@@ -41,10 +41,10 @@ if (!$helper->isCli()) {
 
     <?php
 } else {
-            echo 'Requirement check:' . PHP_EOL;
-            foreach ($requirements as $label => $result) {
-                $status = $result ? '32m passed' : '31m failed';
-                echo "{$label} ... \033[{$status}\033[0m" . PHP_EOL;
-            }
-        }
+    echo 'Requirement check:' . PHP_EOL;
+    foreach ($requirements as $label => $result) {
+        $status = $result ? '32m passed' : '31m failed';
+        echo "{$label} ... \033[{$status}\033[0m" . PHP_EOL;
+    }
+}
 ?>

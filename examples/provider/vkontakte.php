@@ -15,13 +15,13 @@ $client = new CurlClient();
 $helper->setTitle('Vkontakte');
 if (empty($_GET)) {
     echo $helper->getContent();
-} elseif (!empty($_GET['key']) && !empty($_GET['secret']) && $_GET['oauth'] !== 'redirect') {
+} elseif (! empty($_GET['key']) && ! empty($_GET['secret']) && $_GET['oauth'] !== 'redirect') {
     $credentials = new Credentials($_GET['key'], $_GET['secret'], $helper->getCurrentUrl());
     $vkService = new Vkontakte($credentials, $client, $storage);
     echo $helper->getHeader();
     echo '<a href="' . $vkService->getAuthorizationUri() . '">get access token</a>';
     echo $helper->getFooter();
-} elseif (!empty($_GET['code'])) {
+} elseif (! empty($_GET['code'])) {
     $credentials = new Credentials($_GET['key'], $_GET['secret'], $helper->getCurrentUrl());
     $vkService = new Vkontakte($credentials, $client, $storage);
 

@@ -32,7 +32,7 @@ $credentials = new Credentials(
 /** @var Mondo $mondoService */
 $mondoService = $serviceFactory->createService('mondo', $credentials, $storage);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from Mondo, get the token
     $mondoService->requestAccessToken($_GET['code']);
 
@@ -40,7 +40,7 @@ if (!empty($_GET['code'])) {
     $result = json_decode($mondoService->request('ping/whoami'), true);
 
     echo 'Your unique user id is: ' . $result['user_id'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $mondoService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

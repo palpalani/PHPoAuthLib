@@ -36,7 +36,7 @@ $serviceFactory->setHttpClient(new CurlClient());
 // Instantiate the Delicious service using the credentials, http client and storage mechanism for the token
 $deliciousService = $serviceFactory->createService('delicious', $credentials, $storage);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from delicious, get the token
     $token = $deliciousService->requestAccessToken($_GET['code']);
     // Show some of the resultant data
@@ -49,7 +49,7 @@ if (!empty($_GET['code'])) {
     foreach ($array['post'] as $key => $value) {
         echo $value['@attributes']['description'] . ' (' . $value['@attributes']['href'] . ')' . "\n";
     }
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $deliciousService->getAuthorizationUri();
     // var_dump($url);
     header('Location: ' . $url);

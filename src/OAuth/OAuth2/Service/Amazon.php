@@ -25,6 +25,7 @@ class Amazon extends AbstractService
      * @see https://images-na.ssl-images-amazon.com/images/G/01/lwa/dev/docs/website-developer-guide._TTH_.pdf
      */
     const SCOPE_PROFILE = 'profile';
+
     const SCOPE_POSTAL_CODE = 'postal_code';
 
     public function __construct(
@@ -72,7 +73,7 @@ class Amazon extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error_description'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error_description'] . '"');

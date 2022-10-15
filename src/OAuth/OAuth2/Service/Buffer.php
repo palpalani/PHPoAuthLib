@@ -102,9 +102,9 @@ class Buffer extends AbstractService
     {
         parse_str($responseBody, $data);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
-        } elseif (!isset($data['code'])) {
+        } elseif (! isset($data['code'])) {
             throw new TokenResponseException('Error in retrieving code.');
         }
 
@@ -136,7 +136,7 @@ class Buffer extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if ($data === null || !is_array($data)) {
+        if ($data === null || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error'] . '"');

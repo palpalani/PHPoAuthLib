@@ -4,7 +4,7 @@
          colors="true"
 >
     <testsuites>
-        <testsuite name="Unit test ">
+        <testsuite name="Unit test">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

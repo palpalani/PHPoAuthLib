@@ -16,9 +16,9 @@ class SymfonySession implements TokenStorageInterface
     private $stateVariableName;
 
     /**
-     * @param bool $startSession
-     * @param string $sessionVariableName
-     * @param string $stateVariableName
+     * @param  bool  $startSession
+     * @param  string  $sessionVariableName
+     * @param  string  $stateVariableName
      */
     public function __construct(
         SessionInterface $session,
@@ -55,7 +55,7 @@ class SymfonySession implements TokenStorageInterface
         // get previously saved tokens
         $tokens = $this->session->get($this->sessionVariableName);
 
-        if (!is_array($tokens)) {
+        if (! is_array($tokens)) {
             $tokens = [];
         }
 
@@ -135,7 +135,7 @@ class SymfonySession implements TokenStorageInterface
         // get previously saved tokens
         $states = $this->session->get($this->stateVariableName);
 
-        if (!is_array($states)) {
+        if (! is_array($states)) {
             $states = [];
         }
 

@@ -33,17 +33,17 @@ interface TokenInterface
     public function getExtraParams();
 
     /**
-     * @param string $accessToken
+     * @param  string  $accessToken
      */
     public function setAccessToken($accessToken);
 
     /**
-     * @param int $endOfLife
+     * @param  int  $endOfLife
      */
     public function setEndOfLife($endOfLife);
 
     /**
-     * @param int $lifetime
+     * @param  int  $lifetime
      */
     public function setLifetime($lifetime);
 
@@ -55,7 +55,7 @@ interface TokenInterface
     public function getRefreshToken();
 
     /**
-     * @param string $refreshToken
+     * @param  string  $refreshToken
      */
     public function setRefreshToken($refreshToken);
 }

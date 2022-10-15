@@ -32,9 +32,9 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
     protected $apiVersion;
 
     /**
-     * @param array                 $scopes
-     * @param bool $stateParameterInAutUrl
-     * @param string                $apiVersion
+     * @param  array  $scopes
+     * @param  bool  $stateParameterInAutUrl
+     * @param  string  $apiVersion
      */
     public function __construct(
         CredentialsInterface $credentials,
@@ -49,7 +49,7 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
         $this->stateParameterInAuthUrl = $stateParameterInAutUrl;
 
         foreach ($scopes as $scope) {
-            if (!$this->isValidScope($scope)) {
+            if (! $this->isValidScope($scope)) {
                 throw new InvalidScopeException('Scope ' . $scope . ' is not valid for service ' . get_class($this));
             }
         }
@@ -79,7 +79,7 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
         $parameters['scope'] = implode($this->getScopesDelimiter(), $this->scopes);
 
         if ($this->needsStateParameterInAuthUrl()) {
-            if (!isset($parameters['state'])) {
+            if (! isset($parameters['state'])) {
                 $parameters['state'] = $this->generateAuthorizationState();
             }
             $this->storeAuthorizationState($parameters['state']);
@@ -127,12 +127,11 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
      * Sends an authenticated API request to the path provided.
      * If the path provided is not an absolute URI, the base API Uri (must be passed into constructor) will be used.
      *
-     * @param string|UriInterface $path
-     * @param string              $method       HTTP method
-     * @param array               $body         request body if applicable
-     * @param array               $extraHeaders Extra headers if applicable. These will override service-specific
+     * @param  string|UriInterface  $path
+     * @param  string  $method       HTTP method
+     * @param  array  $body         request body if applicable
+     * @param  array  $extraHeaders Extra headers if applicable. These will override service-specific
      *                                          any defaults.
-     *
      * @return string
      */
     public function request($path, $method = 'GET', $body = null, array $extraHeaders = [])
@@ -172,6 +171,7 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
         }
 
         $extraHeaders = array_merge($this->getExtraApiHeaders(), $extraHeaders);
+
         return $this->httpClient->retrieveResponse($uri, $body, $extraHeaders, $method);
     }
 
@@ -220,8 +220,7 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
     /**
      * Return whether or not the passed scope value is valid.
      *
-     * @param string $scope
-     *
+     * @param  string  $scope
      * @return bool
      */
     public function isValidScope($scope)
@@ -244,7 +243,7 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
     /**
      * Validates the authorization state against a given one.
      *
-     * @param string $state
+     * @param  string  $state
      */
     protected function validateAuthorizationState($state): void
     {
@@ -276,7 +275,7 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
     /**
      * Stores a given authorization state into the storage.
      *
-     * @param string $state
+     * @param  string  $state
      */
     protected function storeAuthorizationState($state): void
     {
@@ -308,8 +307,7 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
      *
      * @abstract
      *
-     * @param string $responseBody
-     *
+     * @param  string  $responseBody
      * @return TokenInterface
      */
     abstract protected function parseAccessTokenResponse($responseBody);
@@ -332,7 +330,7 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
      */
     protected function getApiVersionString()
     {
-        return !(empty($this->apiVersion)) ? '/' . $this->apiVersion : '';
+        return ! (empty($this->apiVersion)) ? '/' . $this->apiVersion : '';
     }
 
     /**

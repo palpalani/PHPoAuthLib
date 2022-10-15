@@ -25,10 +25,15 @@ class Heroku extends AbstractService
      * @see https://devcenter.heroku.com/articles/oauth#scopes
      */
     const SCOPE_GLOBAL = 'global';
+
     const SCOPE_IDENTITY = 'identity';
+
     const SCOPE_READ = 'read';
+
     const SCOPE_WRITE = 'write';
+
     const SCOPE_READ_PROTECTED = 'read-protected';
+
     const SCOPE_WRITE_PROTECTED = 'write-protected';
 
     /**
@@ -79,7 +84,7 @@ class Heroku extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error_description']) || isset($data['error'])) {
             throw new TokenResponseException(

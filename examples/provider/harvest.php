@@ -36,7 +36,7 @@ $credentials = new Credentials(
 /** @var Harves $harves */
 $harvest = $serviceFactory->createService($serviceName, $credentials, $storage, $scopes);
 
-if (!empty($_GET['clearToken'])) {
+if (! empty($_GET['clearToken'])) {
     // Clear the current AccessToken and go back to the Beginning.
     $storage->clearToken($serviceName);
     header('Location: ' . $currentUri->getAbsoluteUri());
@@ -55,11 +55,11 @@ if (!empty($_GET['clearToken'])) {
 
     $url = $currentUri->getRelativeUri() . '?clearToken=1';
     echo " <a href='$url'>Click here to clear the current access token</a>";
-} elseif (!empty($_GET['code'])) {
+} elseif (! empty($_GET['code'])) {
     // This was a callback request from harvest, get the token
     $harvest->requestAccessToken($_GET['code']);
     header('Location: ' . $currentUri->getAbsoluteUri());
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     // Redirect to the Authorization uri
     $url = $harvest->getAuthorizationUri();
     header('Location: ' . $url);

@@ -34,7 +34,7 @@ $serviceFactory->setHttpClient(new CurlClient());
 /** @var Nest $nestService */
 $nestService = $serviceFactory->createService('nest', $credentials, $storage);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // retrieve the CSRF state parameter
     $state = $_GET['state'] ?? null;
     // This was a callback request from nest, get the token
@@ -42,7 +42,7 @@ if (!empty($_GET['code'])) {
     // Show some of the resultant data
     $result = json_decode($nestService->request('/devices'), true);
     echo 'Your devices informations ' . print_r($result, true);
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $nestService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

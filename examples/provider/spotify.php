@@ -33,7 +33,7 @@ $credentials = new Credentials(
 /** @var Spotify $spotifyService */
 $spotifyService = $serviceFactory->createService('spotify', $credentials, $storage);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from Spotify, get the token
     $spotifyService->requestAccessToken($_GET['code']);
 
@@ -42,7 +42,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your unique user id is: ' . $result['id'] . ' and your name is ' . $result['display_name'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $spotifyService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

@@ -25,14 +25,23 @@ class Linkedin extends AbstractService
      * @see https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?context=linkedin/context
      */
     const SCOPE_R_LITEPROFILE = 'r_liteprofile';
+
     const SCOPE_R_FULLPROFILE = 'r_fullprofile';
+
     const SCOPE_R_EMAILADDRESS = 'r_emailaddress';
+
     const SCOPE_R_NETWORK = 'r_network';
+
     const SCOPE_R_CONTACTINFO = 'r_contactinfo';
+
     const SCOPE_RW_NUS = 'rw_nus';
+
     const SCOPE_RW_COMPANY_ADMIN = 'rw_company_admin';
+
     const SCOPE_RW_GROUPS = 'rw_groups';
+
     const SCOPE_W_MESSAGES = 'w_messages';
+
     const SCOPE_W_MEMBER_SOCIAL = 'w_member_social';
 
     public function __construct(
@@ -84,7 +93,7 @@ class Linkedin extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error'] . '"');

@@ -13,7 +13,6 @@
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Http\Client\CurlClient;
 use OAuth\Common\Storage\Session;
-
 use OAuth\OAuth2\Service\Strava;
 
 /**
@@ -43,7 +42,7 @@ $stravaService = $serviceFactory->createService('strava', $credentials, $storage
 // Force approuval
 $stravaService->setApprouvalPrompt('force');
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from strava, get the token
     $token = $stravaService->requestAccessToken($_GET['code']);
     // Send a request with it
@@ -51,7 +50,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your Strava user id is: ' . $result['id'] . ' and your name is ' . $result['firstname'] . ' ' . $result['lastname'] . '!';
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $stravaService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

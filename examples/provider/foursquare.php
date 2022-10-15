@@ -33,7 +33,7 @@ $credentials = new Credentials(
 /** @var Foursquare $foursquareService */
 $foursquareService = $serviceFactory->createService('foursquare', $credentials, $storage);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from foursquare, get the token
     $foursquareService->requestAccessToken($_GET['code']);
 
@@ -42,7 +42,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your unique foursquare user id is: ' . $result['response']['user']['id'] . ' and your name is ' . $result['response']['user']['firstName'] . $result['response']['user']['lastName'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $foursquareService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

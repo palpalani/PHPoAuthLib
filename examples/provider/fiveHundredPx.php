@@ -34,7 +34,7 @@ $credentials = new Credentials(
 /** @var fiveHundredPx $fivehundredpxService */
 $fivehundredpxService = $serviceFactory->createService('FiveHundredPx', $credentials, $storage);
 
-if (!empty($_GET['oauth_token'])) {
+if (! empty($_GET['oauth_token'])) {
     $token = $storage->retrieveAccessToken('FiveHundredPx');
 
     // This was a callback request from fivehundredpx, get the token
@@ -48,7 +48,7 @@ if (!empty($_GET['oauth_token'])) {
 
     echo '<img src="' . $result['user']['avatars']['default']['http'] . '"><br><b>' . $result['user']['username'] . '</b><hr>';
     echo 'result: <pre>' . print_r($result, true) . '</pre>';
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     // extra request needed for oauth1 to request a request token :-)
     $token = $fivehundredpxService->requestRequestToken();
 

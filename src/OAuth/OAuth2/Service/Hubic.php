@@ -30,14 +30,23 @@ class Hubic extends AbstractService
 {
     // Scopes
     const SCOPE_USAGE_GET = 'usage.r';
+
     const SCOPE_ACCOUNT_GET = 'account.r';
+
     const SCOPE_GETALLLINKS_GET = 'getAllLinks.r';
+
     const SCOPE_CREDENTIALS_GET = 'credentials.r';
+
     const SCOPE_SPONSORCODE_GET = 'sponsorCode.r';
+
     const SCOPE_ACTIVATE_POST = 'activate.w';
+
     const SCOPE_SPONSORED_GET = 'sponsored.r';
+
     const SCOPE_LINKS_GET = 'links.r';
+
     const SCOPE_LINKS_POST = 'links.rw';
+
     const SCOPE_LINKS_ALL = 'links.drw';
 
     public function __construct(
@@ -92,7 +101,7 @@ class Hubic extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException(
@@ -136,7 +145,7 @@ class Hubic extends AbstractService
         $parameters['scope'] = implode(',', $this->scopes);
 
         if ($this->needsStateParameterInAuthUrl()) {
-            if (!isset($parameters['state'])) {
+            if (! isset($parameters['state'])) {
                 $parameters['state'] = $this->generateAuthorizationState();
             }
             $this->storeAuthorizationState($parameters['state']);

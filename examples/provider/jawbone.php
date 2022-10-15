@@ -32,7 +32,7 @@ $credentials = new Credentials(
 /** @var JawboneUP $jawboneService */
 $jawboneService = $serviceFactory->createService('JawboneUP', $credentials, $storage, []);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from JawboneUP, get the token
     $token = $jawboneService->requestAccessToken($_GET['code']);
 
@@ -41,7 +41,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your unique Jawbone UP user id is: ' . $result['data']['xid'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $jawboneService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

@@ -34,9 +34,8 @@ abstract class AbstractService implements ServiceInterface
     }
 
     /**
-     * @param string|UriInterface $path
-     * @param UriInterface        $baseApiUri
-     *
+     * @param  string|UriInterface  $path
+     * @param  UriInterface  $baseApiUri
      * @return UriInterface
      */
     protected function determineRequestUriFromPath($path, ?UriInterface $baseApiUri = null)

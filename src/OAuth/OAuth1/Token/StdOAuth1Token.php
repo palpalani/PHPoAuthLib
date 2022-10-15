@@ -26,7 +26,7 @@ class StdOAuth1Token extends AbstractToken implements TokenInterface
     protected $accessTokenSecret;
 
     /**
-     * @param string $requestToken
+     * @param  string  $requestToken
      */
     public function setRequestToken($requestToken): void
     {
@@ -42,7 +42,7 @@ class StdOAuth1Token extends AbstractToken implements TokenInterface
     }
 
     /**
-     * @param string $requestTokenSecret
+     * @param  string  $requestTokenSecret
      */
     public function setRequestTokenSecret($requestTokenSecret): void
     {
@@ -58,7 +58,7 @@ class StdOAuth1Token extends AbstractToken implements TokenInterface
     }
 
     /**
-     * @param string $accessTokenSecret
+     * @param  string  $accessTokenSecret
      */
     public function setAccessTokenSecret($accessTokenSecret): void
     {

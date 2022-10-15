@@ -157,13 +157,13 @@ class QuickBooksTest extends TestCase
         ?ClientInterface $client = null,
         ?TokenStorageInterface $storage = null
     ) {
-        if (!$client) {
+        if (! $client) {
             $client = $this->createMock(
                 '\\OAuth\\Common\\Http\\Client\\ClientInterface'
             );
         }
 
-        if (!$storage) {
+        if (! $storage) {
             $storage = $this->createMock(
                 '\\OAuth\\Common\\Storage\\TokenStorageInterface'
             );

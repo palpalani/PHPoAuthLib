@@ -33,7 +33,7 @@ $credentials = new Credentials(
 /** @var buffer $bufferService */
 $bufferService = $serviceFactory->createService('buffer', $credentials, $storage);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from buffer, get the token
     $bufferService->requestAccessToken($_GET['code']);
 
@@ -42,7 +42,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your unique user id is: ' . $result['id'] . ' and your plan is ' . $result['plan'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $bufferService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

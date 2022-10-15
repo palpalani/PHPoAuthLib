@@ -2,13 +2,13 @@
 
 namespace OAuth\OAuth2\Service;
 
-use OAuth\OAuth2\Token\StdOAuth2Token;
-use OAuth\Common\Http\Exception\TokenResponseException;
-use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Consumer\CredentialsInterface;
 use OAuth\Common\Http\Client\ClientInterface;
-use OAuth\Common\Storage\TokenStorageInterface;
+use OAuth\Common\Http\Exception\TokenResponseException;
+use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Uri\UriInterface;
+use OAuth\Common\Storage\TokenStorageInterface;
+use OAuth\OAuth2\Token\StdOAuth2Token;
 
 class Yandex extends AbstractService
 {
@@ -17,13 +17,13 @@ class Yandex extends AbstractService
      *
      * @link https://tech.yandex.ru/money/doc/dg/concepts/protocol-rights-docpage/
      */
-    const SCOPE_ACCOUNT_INFO         = 'account-info';
+    const SCOPE_ACCOUNT_INFO = 'account-info';
 
     public function __construct(
         CredentialsInterface $credentials,
         ClientInterface $httpClient,
         TokenStorageInterface $storage,
-        $scopes = array(),
+        $scopes = [],
         UriInterface $baseApiUri = null
     ) {
         parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri);
@@ -55,7 +55,7 @@ class Yandex extends AbstractService
     protected function parseAccessTokenResponse($responseBody)
     {
         $data = json_decode($responseBody, true);
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['error'] . '"');
@@ -84,6 +84,4 @@ class Yandex extends AbstractService
     {
         return static::AUTHORIZATION_METHOD_QUERY_STRING_V5;
     }
-
-
 }

@@ -36,8 +36,10 @@ class Netatmo extends AbstractService
 
     // Used to read weather station's data (devicelist, getmeasure)
     const SCOPE_STATION_READ = 'read_station';
+
     // Used to read thermostat's data (devicelist, getmeasure, getthermstate)
     const SCOPE_THERMOSTAT_READ = 'read_thermostat';
+
     // Used to configure the thermostat (syncschedule, setthermpoint)
     const SCOPE_THERMOSTAT_WRITE = 'write_thermostat';
 
@@ -93,7 +95,7 @@ class Netatmo extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
             throw new TokenResponseException(

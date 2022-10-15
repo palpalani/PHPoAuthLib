@@ -36,7 +36,7 @@ $credentials = new Credentials(
 // Instantiate the Yammer service using the credentials, http client and storage mechanism for the token
 $yammerService = $serviceFactory->createService('yammer', $credentials, $storage, []);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // This was a callback request from yammer, get the token
     $token = $yammerService->requestAccessToken($_GET['code']);
 
@@ -47,7 +47,7 @@ if (!empty($_GET['code'])) {
     // all endpoints can be find here: https://developer.yammer.com/restapi/#rest-networks
     $result = json_decode($yammerService->request('messages.json'), true);
     print_r($result);
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $yammerService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

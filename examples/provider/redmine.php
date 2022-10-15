@@ -26,15 +26,15 @@ $storage = new Session();
 
 // Setup the credentials for the requests
 $credentials = new Credentials(
-  $servicesCredentials['redmine']['key'],
-  $servicesCredentials['redmine']['secret'],
-  $currentUri->getAbsoluteUri()
+    $servicesCredentials['redmine']['key'],
+    $servicesCredentials['redmine']['secret'],
+    $currentUri->getAbsoluteUri()
 );
 
 // Instantiate the Redmine service using the credentials, http client, storage mechanism for the token and adding the base uri of the oauth provider
 $redmineService = $serviceFactory->createService('Redmine', $credentials, $storage, [], new Uri('https://redmine.example.dev/oauth/'));
 
-if (!empty($_GET['oauth_token'])) {
+if (! empty($_GET['oauth_token'])) {
     $token = $storage->retrieveAccessToken('Redmine');
 
     // This was a callback request from Redmine, get the token
@@ -48,7 +48,7 @@ if (!empty($_GET['oauth_token'])) {
     $result = json_decode($redmineService->request('user_info.json'));
 
     echo 'result: <pre>' . print_r($result, true) . '</pre>';
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     // extra request needed for oauth1 to request a request token :-)
     $token = $redmineService->requestRequestToken();
 

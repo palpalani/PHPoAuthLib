@@ -26,11 +26,17 @@ class Paypal extends AbstractService
      * @see  #attributes
      */
     const SCOPE_OPENID = 'openid';
+
     const SCOPE_PROFILE = 'profile';
+
     const SCOPE_PAYPALATTRIBUTES = 'https://uri.paypal.com/services/paypalattributes';
+
     const SCOPE_EMAIL = 'email';
+
     const SCOPE_ADDRESS = 'address';
+
     const SCOPE_PHONE = 'phone';
+
     const SCOPE_EXPRESSCHECKOUT = 'https://uri.paypal.com/services/expresscheckout';
 
     public function __construct(
@@ -78,7 +84,7 @@ class Paypal extends AbstractService
     {
         $data = json_decode($responseBody, true);
 
-        if (null === $data || !is_array($data)) {
+        if (null === $data || ! is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['message'])) {
             throw new TokenResponseException('Error in retrieving token: "' . $data['message'] . '"');

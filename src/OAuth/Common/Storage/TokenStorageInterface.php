@@ -10,22 +10,19 @@ use OAuth\Common\Token\TokenInterface;
 interface TokenStorageInterface
 {
     /**
-     * @param string $service
-     *
+     * @param  string  $service
      * @return TokenInterface
      */
     public function retrieveAccessToken($service);
 
     /**
-     * @param string         $service
-     *
+     * @param  string  $service
      * @return TokenStorageInterface
      */
     public function storeAccessToken($service, TokenInterface $token);
 
     /**
-     * @param string $service
-     *
+     * @param  string  $service
      * @return bool
      */
     public function hasAccessToken($service);
@@ -33,8 +30,7 @@ interface TokenStorageInterface
     /**
      * Delete the users token. Aka, log out.
      *
-     * @param string $service
-     *
+     * @param  string  $service
      * @return TokenStorageInterface
      */
     public function clearToken($service);
@@ -50,9 +46,8 @@ interface TokenStorageInterface
     /**
      * Store the authorization state related to a given service.
      *
-     * @param string $service
-     * @param string $state
-     *
+     * @param  string  $service
+     * @param  string  $state
      * @return TokenStorageInterface
      */
     public function storeAuthorizationState($service, $state);
@@ -60,8 +55,7 @@ interface TokenStorageInterface
     /**
      * Check if an authorization state for a given service exists.
      *
-     * @param string $service
-     *
+     * @param  string  $service
      * @return bool
      */
     public function hasAuthorizationState($service);
@@ -69,8 +63,7 @@ interface TokenStorageInterface
     /**
      * Retrieve the authorization state for a given service.
      *
-     * @param string $service
-     *
+     * @param  string  $service
      * @return string
      */
     public function retrieveAuthorizationState($service);
@@ -78,8 +71,7 @@ interface TokenStorageInterface
     /**
      * Clear the authorization state of a given service.
      *
-     * @param string $service
-     *
+     * @param  string  $service
      * @return TokenStorageInterface
      */
     public function clearAuthorizationState($service);

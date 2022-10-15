@@ -34,7 +34,7 @@ $credentials = new Credentials(
 /** @var Facebook $facebookService */
 $facebookService = $serviceFactory->createService('facebook', $credentials, $storage, []);
 
-if (!empty($_GET['code'])) {
+if (! empty($_GET['code'])) {
     // retrieve the CSRF state parameter
     $state = $_GET['state'] ?? null;
 
@@ -46,7 +46,7 @@ if (!empty($_GET['code'])) {
 
     // Show some of the resultant data
     echo 'Your unique facebook user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
-} elseif (!empty($_GET['go']) && $_GET['go'] === 'go') {
+} elseif (! empty($_GET['go']) && $_GET['go'] === 'go') {
     $url = $facebookService->getAuthorizationUri();
     header('Location: ' . $url);
 } else {

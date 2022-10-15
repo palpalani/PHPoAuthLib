@@ -77,7 +77,7 @@ HTML;
 
     public function getFooter()
     {
-        return <<<HTML
+        return <<<'HTML'
     </body>
     </html>
 HTML;
@@ -85,7 +85,7 @@ HTML;
 
     public function getForm(): string
     {
-        return  <<<HTML
+        return  <<<'HTML'
             <form>
               <div class="form-group">
                 <label for="exampleInputEmail1">key</label>
