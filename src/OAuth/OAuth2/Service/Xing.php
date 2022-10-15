@@ -67,11 +67,11 @@ class Xing extends AbstractService
         } elseif (isset($data['error'])) {
             throw new TokenResponseException(
                 sprintf(
-                'Error in retrieving access token, error: "%s", description: "%s", uri: "%s".',
-                $data['error'],
-                $data['error_description'],
-                $data['error_uri']
-            )
+                    'Error in retrieving access token, error: "%s", description: "%s", uri: "%s".',
+                    $data['error'],
+                    $data['error_description'],
+                    $data['error_uri']
+                )
             );
         }
 
